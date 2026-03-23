@@ -1,0 +1,11 @@
+{
+  "features": {
+    "useHTML": true,
+    "useCustomValidator": true,
+    "useLocalStorage": true,
+    "useFHIR": false,
+    "useOAuth": false,
+    "use3DUniverse": true,
+    "useAutoDiscovery": true
+  }
+}
