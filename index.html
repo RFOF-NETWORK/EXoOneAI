@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PZQQET - Neural 3D Engine</title>
+    <style>
+        body, html { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; background: #050505; color: #00ffcc; font-family: monospace; }
+        #ui-layer { position: absolute; top: 10px; left: 10px; z-index: 10; pointer-events: none; }
+        .panel { background: rgba(0, 20, 20, 0.8); border: 1px solid #00ffcc; padding: 15px; pointer-events: all; margin-bottom: 10px; }
+        canvas { display: block; width: 100vw; height: 100vh; }
+        button { background: #00ffcc; border: none; padding: 5px 10px; cursor: pointer; font-weight: bold; }
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+    <div id="ui-layer">
+        <div id="info-panel" class="panel">
+            <h2>PZQQET Engine</h2>
+            <div id="status">System Initializing...</div>
+            <hr>
+            <div id="details">Knoten wählen für Details</div>
+        </div>
+        <div class="panel">
+            <button onclick="APP.ui.addRandomNode()">+ Neuron hinzufügen</button>
+        </div>
+    </div>
+    <canvas id="renderCanvas"></canvas>
+
+    <script src="api.js"></script>
+    <script src="app.js"></script>
+    <script>
+        // Bootstrapping Logic
+        async function bootstrap() {
+            try {
+                const configReq = await fetch('config.json');
+                const config = await configReq.json();
+                const schemaReq = await fetch('schema.json');
+                const schema = await schemaReq.json();
+                
+                window.API.init(config, schema);
+                window.APP.init(config, schema, window.API);
+            } catch (e) {
+                console.error("Bootstrap Error:", e);
+                document.getElementById('status').innerText = "Boot Error: Config missing.";
+            }
+        }
+        window.onload = bootstrap;
+    </script>
+</body>
+</html>
