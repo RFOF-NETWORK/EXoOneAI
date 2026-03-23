@@ -1,0 +1,22 @@
+{
+  "ui_schema": {
+    "views": ["3DGraphView", "NodeDetailView"],
+    "elements": ["Panel", "Canvas", "Button"]
+  },
+  "data_schema": {
+    "node": {
+      "id": "string",
+      "label": "string"
+    },
+    "link": {
+      "id": "string",
+      "source": "string",
+      "target": "string",
+      "weight": "number"
+    }
+  },
+  "modules": {
+    "storage": "localStorage",
+    "validator": "internal"
+  }
+}
